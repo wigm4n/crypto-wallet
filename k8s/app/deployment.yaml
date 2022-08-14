@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crypto-wallet
+  labels:
+    app: crypto-wallet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crypto-wallet
+  template:
+    metadata:
+      labels:
+        app: crypto-wallet
+    spec:
+      containers:
+        - name: crypto-wallet
+          image: wigm4n/crypto-wallet:1.0.0
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          env:
+            - name: DATASOURCE_HOST
+              value: xxx
+            - name: DATASOURCE_USERNAME
+              value: xxx
+            - name: DATASOURCE_PASSWORD
+              value: xxx
+            - name: KEYCLOAK_HOST
+              value: xxx
+            - name: KEYCLOAK_ADMIN_USERNAME
+              value: xxx
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: xxx
+            - name: spring.mvc.servlet.path
+              value: /crypto-wallet

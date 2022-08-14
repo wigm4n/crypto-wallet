@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-development
+  labels:
+    app: keycloak-development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak-development
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: keycloak-development
+    spec:
+      containers:
+        - name: keycloak-development
+          image: quay.io/keycloak/keycloak:8.0.2
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          env:
+            - name: "KEYCLOAK_USER"
+              value: "wallet_super_user_7462"
+            - name: "KEYCLOAK_PASSWORD"
+              value: "Qjdhn58123Dzz"
+            - name: "PROXY_ADDRESS_FORWARDING"
+              value: "true"
+            - name: "KEYCLOAK_FRONTEND_URL"
+              value: "http://84.201.134.104/auth/"
+            - name: "KEYCLOAK_ADMIN_URL"
+              value: "http://84.201.134.104/auth/realms/master/admin/"
+            - name: "DB_VENDOR"
+              value: "POSTGRES"
+            - name: "DB_ADDR"
+              value: "rc1b-zwfw27jtmv0jw9ql.mdb.yandexcloud.net"
+            - name: "DB_PORT"
+              value: "6432"
+            - name: "DB_DATABASE"
+              value: "keycloak_db"
+            - name: "DB_USER"
+              value: "admin_user"
+            - name: "DB_PASSWORD"
+              value: "admin_password"

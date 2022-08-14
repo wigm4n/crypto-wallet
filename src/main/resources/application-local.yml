@@ -1,0 +1,32 @@
+server:
+  port: 8081
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8070/auth/realms/WalletKeycloak/protocol/openid-connect/certs
+  datasource:
+    url: jdbc:postgresql://localhost:5432/crypto_wallet
+    username: myuser
+
+resource-server:
+  keycloak:
+    endpoint-templates:
+      token-issue-url-template: http://localhost:8070/auth/realms/%s/protocol/openid-connect/token
+      users-management-url-template: http://localhost:8070/auth/admin/realms/%s/users
+    clients:
+      admin:
+        realm: master
+        client_id: admin-cli
+        grant_type: password
+        username: admin
+        password: admin
+      user:
+        realm: WalletKeycloak
+        client_id: login-app
+        grant_type: password
+
+web-security:
+  config:
+    ant-pattern: /api/auth/**

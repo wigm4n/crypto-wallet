@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crypto-wallet-lb
+  labels:
+    app: crypto-wallet-lb
+spec:
+  ports:
+    - name: plaintext
+      port: 80
+      targetPort: 8080
+  selector:
+    app: crypto-wallet
+  type: LoadBalancer

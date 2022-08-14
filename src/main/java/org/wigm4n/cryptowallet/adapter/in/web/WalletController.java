@@ -84,7 +84,7 @@ public class WalletController {
             @PathVariable @NotBlank String transactionId
     ) {
         log.info("Принят запрос по ручке GET /api/wallets/{walletId}/transactions/{transactionId}");
-        var response = getWalletTransactionInfoUseCase.getInfo(walletId, transactionId);
+        var response = getWalletTransactionInfoUseCase.getTransactionInfo(walletId, transactionId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

@@ -1,11 +1,11 @@
 databaseChangeLog:
   - logicalFilePath: db/changelog/db.changelog-1.yaml
   - changeSet:
-      id: 1
+      id: 1660501424
       author: wigm4n
       changes:
         - createTable:
-            tableName: user_info
+            tableName: users_info
             columns:
               - column:
                   name: id
@@ -28,6 +28,35 @@ databaseChangeLog:
               - column:
                   name: patronymic
                   type: varchar(50)
+              - column:
+                  name: created_at
+                  type: datetime
+              - column:
+                  name: updated_at
+                  type: datetime
+        - createTable:
+            tableName: wallets_info
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: wallet_id
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_wallet_owner_user_id
+                    references: users_info(id)
               - column:
                   name: created_at
                   type: datetime

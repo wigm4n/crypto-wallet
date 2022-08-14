@@ -146,10 +146,16 @@ public class ResourceServerAdapter implements RegisterNewUserPort, ExchangeJwtPo
 
     private String retrieveGeneratedUserId(HttpHeaders headers) {
         var splittedElements = Optional.ofNullable(headers.get(RESPONSE_USER_ID_HEADER_NAME))
-                .orElseThrow(() -> new IllegalArgumentException("В ответ на создание пользователя в Keycloak не вернулся userId в хедерах"))
+                .orElseThrow(
+                        () -> new IllegalArgumentException(
+                                "В ответ на создание пользователя в Keycloak не вернулся userId в хедерах")
+                )
                 .stream()
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("В ответ на создание пользователя в Keycloak не вернулся userId в хедерах"))
+                .orElseThrow(
+                        () -> new IllegalArgumentException(
+                                "В ответ на создание пользователя в Keycloak не вернулся userId в хедерах")
+                )
                 .split("/");
         return splittedElements[splittedElements.length - 1];
     }

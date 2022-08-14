@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "user_info")
+@Table(name = "users_info")
 @Data
 @NoArgsConstructor
 public class UserInfo {
@@ -24,6 +24,7 @@ public class UserInfo {
 
     @Column(name = "username", unique = true, nullable = false)
     private String username;
+
     private String name;
     private String surname;
     private String patronymic;

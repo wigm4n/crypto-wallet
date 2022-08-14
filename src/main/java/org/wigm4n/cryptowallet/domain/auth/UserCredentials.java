@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class UserCredentials {
     @NotBlank
-    @Size(min = 5)
+    @Size(min = 5, max = 50)
     private String username;
     @NotBlank
     @Size(min = 4)

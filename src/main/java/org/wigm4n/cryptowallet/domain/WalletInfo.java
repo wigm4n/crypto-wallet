@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "wallet")
+@Table(name = "wallets_info")
 @Data
 @NoArgsConstructor
 public class WalletInfo {
@@ -20,11 +20,13 @@ public class WalletInfo {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "wallet_id", unique = true, nullable = false)
+    private String walletId;
 
     private String userId;
-    private String walletId;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
